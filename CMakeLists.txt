@@ -22,7 +22,9 @@ add_executable(follower_mpcc
         src/Models/dynamic_bicycle.cpp
         src/Models/model_interface.h
         src/Params/params.h
-        src/Params/params.cpp)
+        src/Params/params.cpp
+        src/Utils/binary_search.h
+        src/Utils/binary_search.cpp)
 
 # For matplotlib
 find_package(PythonLibs REQUIRED)

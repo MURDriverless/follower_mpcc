@@ -11,9 +11,11 @@ int utils::binary_search_left(const VectorXd &arr, double x) {
 
     if (x < arr(lo)) {
         std::cout << "Binary search for x = " << x << " is set to arr(0): " << arr(lo) << std::endl;
+        x = arr(lo);
     }
     else if (x > arr(hi-1)) {
         std::cout << "Binary search for x = " << x << " is set to arr(end-1): " << arr(hi-1) << std::endl;
+        x = arr(hi-1);
     }
 
     // Taken from Python's bisect.bisect_left()

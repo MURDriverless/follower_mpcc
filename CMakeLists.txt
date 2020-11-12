@@ -24,7 +24,9 @@ add_executable(follower_mpcc
         src/Params/params.h
         src/Params/params.cpp
         src/Utils/binary_search.h
-        src/Utils/binary_search.cpp)
+        src/Utils/binary_search.cpp
+        src/Splines/cubic_spline.h
+        src/Splines/cubic_spline.cpp)
 
 # For matplotlib
 find_package(PythonLibs REQUIRED)

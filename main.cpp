@@ -11,6 +11,8 @@
 #include "src/Utils/binary_search.h"
 // Test cubic spline
 #include "src/Splines/cubic_spline.h"
+// Test cubic spline 2d
+#include "src/Splines/cubic_spline2d.h"
 
 using namespace std;
 
@@ -64,16 +66,29 @@ int main() {
     /*
      * Test cubic spline
      * */
-    VectorXd t_arr(6);
-    VectorXd ft_arr(6);
-    for (int i = 0; i < t_arr.size(); i++) {
-        t_arr(i) = (double) i;
-        ft_arr(i) = (double) i;
+//    VectorXd t_arr(6);
+//    VectorXd ft_arr(6);
+//    for (int i = 0; i < t_arr.size(); i++) {
+//        t_arr(i) = (double) i;
+//        ft_arr(i) = (double) i;
+//    }
+//    CubicSpline spline = CubicSpline(t_arr, ft_arr);
+//    double target_t = 10.0;
+//    double target_val = spline.getPosition(target_t);
+//    cout << "At t = " << target_t << ", the value is " << target_val << endl;
+
+
+    /*
+     * Test cubic spline 2D
+     * */
+    VectorXd x_data(20);
+    VectorXd y_data(20);
+    for (int i = 0; i < x_data.size(); i++) {
+        x_data(i) = i;
+        y_data(i) = i * sin(i *3.142 / 180);
     }
-    CubicSpline spline = CubicSpline(t_arr, ft_arr);
-    double target_t = 10.0;
-    double target_val = spline.getPosition(target_t);
-    cout << "At t = " << target_t << ", the value is " << target_val << endl;
+    CubicSpline2D spline2D = CubicSpline2D(x_data, y_data);
+    cout << spline2D.getPosition(15.0) << endl;
 
 
     return 0;

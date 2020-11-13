@@ -8,6 +8,15 @@
 #define NX 10
 #define NU 3
 
+// Number of polytopic constraints (don't worry about the term "polytopic"):
+// 1. Track constraint
+// 2. Rear tire forces ellipse constraint
+// 3. Front tire forces ellipse constraint
+// while state and input constraints are termed as lower and upper "bounds"
+#define NPC 3
+// Number of soft constraints (we have 3 for all our polytopic constraints):
+#define NS 3
+
 struct StateInputIndex {
     // State indices
     int X = 0;  // global x position

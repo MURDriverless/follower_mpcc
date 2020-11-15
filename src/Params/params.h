@@ -53,4 +53,30 @@ public:
     double vx_zero;
 };
 
+class CostParams {
+public:
+    CostParams();
+    explicit CostParams(const std::string &file_path);
+
+    double q_c;
+    double q_l;
+    double q_virtual_input;
+
+    double r_accel_D;
+    double r_steering_angle;
+    double r_virtual_input;
+
+    double r_d_accel_D;
+    double r_d_steering_angle;
+    double r_d_virtual_input;
+
+    double sc_quad_track;
+    double sc_quad_tire;
+    double sc_quad_alpha;
+
+    double sc_lin_track;
+    double sc_lin_tire;
+    double sc_lin_alpha;
+};
+
 #endif //FOLLOWER_MPCC_PARAMS_H

@@ -28,7 +28,9 @@ add_executable(follower_mpcc
         src/Splines/cubic_spline.h
         src/Splines/cubic_spline.cpp
         src/Splines/cubic_spline2d.h
-        src/Splines/cubic_spline2d.cpp)
+        src/Splines/cubic_spline2d.cpp
+        src/Cost/cost.h
+        src/Cost/cost.cpp)
 
 # For matplotlib
 find_package(PythonLibs REQUIRED)

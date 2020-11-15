@@ -36,9 +36,9 @@ struct StateInputIndex {
     int d_virtual_input = 2;
 
     // Constraint indices
-    int constraint_track = 0;
-    int constraint_tire = 1;
-    int constraint_alpha = 2;
+    int constraint_track = 0;  // constrain the car within the track
+    int constraint_tire = 1;   // tire force ellipsis
+    int constraint_alpha = 2;  // max. slip angle
 };
 
 static const StateInputIndex IndexMap;

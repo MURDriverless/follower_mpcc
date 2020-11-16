@@ -61,6 +61,7 @@ public:
     double q_c;
     double q_l;
     double q_virtual_input;
+    double q_beta;  // vehicular slip angle regularisation cost
 
     double r_accel_D;
     double r_steering_angle;

@@ -52,6 +52,13 @@ struct ContouringError {
 };
 
 
+// General container to hold linearisation variables: setpoint value (bar) and Jacobian (jac)
+struct LinearisedVar {
+    const double bar;
+    const Matrix<double, 1, NX> jac;
+};
+
+
 class Cost {
 public:
     CostMatrix getCost(const CubicSpline2D &path, const State &xk);
@@ -63,7 +70,13 @@ private:
     CostTerm<R_MPC, r_MPC> getInputChangeCost() const;
     CostTerm<Z_MPC, z_MPC> getSoftConstraintsCost() const;
 
+    // Helper functions to determine vehicular slip angle (beta; alpha is for tire slip angles)
+    static LinearisedVar getBetaKin(const State &xk, double lf, double lr);
+    static LinearisedVar getBetaDyn(const State &xk);
+    CostTerm<Q_MPC, q_MPC> getBetaCost(const State &xk) const;
+
     CostParams cost_params;
+    ModelParams model_params;
 };
 
 #endif //FOLLOWER_MPCC_COST_H

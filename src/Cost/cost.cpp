@@ -6,6 +6,13 @@
 
 using Eigen::Vector2d;
 
+Cost::Cost() = default;
+
+Cost::Cost(const CostParams &costParams, const ModelParams &modelParams) {
+    this->cost_params = costParams;
+    this->model_params = modelParams;
+}
+
 CostTerm<Q_MPC, q_MPC> Cost::getRawInputCost() const {
     // Raw input cost is linear, so there are only quadratic terms
     Q_MPC Q = Q_MPC::Zero();
@@ -162,4 +169,43 @@ CostTerm<Q_MPC, q_MPC> Cost::getBetaCost(const State &xk) const {
     q_MPC q = 2 * beta_bar * cost_params.q_beta * d_beta;
 
     return { Q, q };
+}
+
+CostMatrix Cost::getCost(const CubicSpline2D &path, const State &xk) {
+    CostTerm<Q_MPC, q_MPC> contouring = getContouringCost(path, xk);
+    CostTerm<Q_MPC, q_MPC> raw_input = getRawInputCost();
+    CostTerm<R_MPC, r_MPC> input_change = getInputChangeCost();
+    CostTerm<Z_MPC, z_MPC> soft_constraints = getSoftConstraintsCost();
+//    CostTerm<Q_MPC, q_MPC> slip_angle = getBetaCost(xk);
+
+    // Q
+    Q_MPC Q_not_sym = contouring.quad_cost + raw_input.quad_cost;
+    Q_not_sym = 2.0 * Q_not_sym;
+    Q_MPC Q = 0.5 * (Q_not_sym.transpose() + Q_not_sym);
+
+    // R
+    R_MPC R = input_change.quad_cost;
+    // Solver expects 0.5*uT*R*u
+    R = 2.0 * R;
+
+    // S (polytopic cost) will be 0 as it is not used
+    S_MPC S = S_MPC::Zero();
+
+    // q
+    q_MPC q = contouring.lin_cost + raw_input.lin_cost;
+    // Not sure about the line below, this was implemented in AL-MPCC
+    q = q + (xk.adjoint()*Q).adjoint();
+
+    // r, which should be zero
+    r_MPC r = input_change.lin_cost;
+
+    // Z
+    Z_MPC Z = soft_constraints.quad_cost;
+    // Similar to Q and R, quad cost has to be multiplied by 2.0
+    Z = 2.0 * Z;
+
+    // z
+    z_MPC z = soft_constraints.lin_cost;
+
+    return { Q, R, S, q, r, Z, z };
 }

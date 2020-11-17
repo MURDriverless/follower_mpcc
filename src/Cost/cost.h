@@ -61,6 +61,8 @@ struct LinearisedVar {
 
 class Cost {
 public:
+    Cost();
+    Cost(const CostParams &costParams, const ModelParams &modelParams);
     CostMatrix getCost(const CubicSpline2D &path, const State &xk);
 private:
     static RefPoint getRefPoint(const CubicSpline2D &path, const State &xk);

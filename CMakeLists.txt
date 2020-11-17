@@ -30,7 +30,9 @@ add_executable(follower_mpcc
         src/Splines/cubic_spline2d.h
         src/Splines/cubic_spline2d.cpp
         src/Cost/cost.h
-        src/Cost/cost.cpp)
+        src/Cost/cost.cpp
+        src/Constraints/bounds.h
+        src/Constraints/bounds.cpp)
 
 # For matplotlib
 find_package(PythonLibs REQUIRED)

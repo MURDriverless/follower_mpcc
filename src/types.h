@@ -50,10 +50,10 @@ typedef Eigen::Matrix<double, NS, 1> z_MPC;
  * Constraints and bounds
  * */
 // Polytopic constraints
-typedef Eigen::Matrix<double, NPC, NX> C_MPC;
-typedef Eigen::Matrix<double, 1, NX> C_i_MPC;
-typedef Eigen::Matrix<double, NPC, NU> D_MPC;
-typedef Eigen::Matrix<double, NPC, 1> d_MPC;
+typedef Eigen::Matrix<double, NPC, NX> C_MPC;  // Jacobian of all constraints versus state
+typedef Eigen::Matrix<double, 1, NX> C_i_MPC;  // Jacobian of one constraint versus state
+typedef Eigen::Matrix<double, NPC, NU> D_MPC;  // Jacobian of all constraints versus input
+typedef Eigen::Matrix<double, NPC, 1> d_MPC;  // limit of all constraints (min or max)
 
 // Bounds matrices
 typedef Eigen::Matrix<double, NX, 1> Bounds_x;

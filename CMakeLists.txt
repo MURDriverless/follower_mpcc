@@ -32,7 +32,10 @@ add_executable(follower_mpcc
         src/Cost/cost.h
         src/Cost/cost.cpp
         src/Constraints/bounds.h
-        src/Constraints/bounds.cpp)
+        src/Constraints/bounds.cpp
+        src/Constraints/constraints.h
+        src/Constraints/constraints.cpp
+        src/Splines/track.h)
 
 # For matplotlib
 find_package(PythonLibs REQUIRED)

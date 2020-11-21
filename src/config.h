@@ -17,6 +17,8 @@
 // Number of soft constraints (we have 3 for all our polytopic constraints):
 #define NS 3
 
+#define INF 1E5
+
 struct StateInputIndex {
     // State indices
     int X = 0;  // global x position

@@ -54,8 +54,9 @@ TrackConstraints Constraints::getTrackConstraint(const Track &track, const State
 
     // Compute limits
     const Vector2d p_bar = G * state_from_centre;
-    const Vector2d lower_bound = Vector2d {-1.0, -INF} - p_bar;
-    const Vector2d upper_bound = Vector2d {1.0, INF} - p_bar;
+    const double cross_track_limit_abs = 1.0 - safety_margin;
+    const Vector2d lower_bound = Vector2d {-cross_track_limit_abs, -INF} - p_bar;
+    const Vector2d upper_bound = Vector2d {cross_track_limit_abs, INF} - p_bar;
 
     return { J_p, lower_bound, upper_bound };
 }

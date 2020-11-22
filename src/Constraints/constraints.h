@@ -20,7 +20,6 @@ struct TrackConstraints {
     Vector2d upper_bound;
 };
 
-
 class Constraints {
 private:
     static TrackConstraints getTrackConstraint(const Track &track, const State &xk, double safety_margin = 0.0);

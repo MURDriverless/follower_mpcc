@@ -50,8 +50,9 @@ public:
 
     TireForces getForceRear(const State &xk) const;
     TireForcesDerivatives getForceRearDerivatives(const State &xk) const;
-private:
+
     ModelParams params;
+private:
     State predictContinuous(const State &xk, const Input &uk) const;
     LinModelMatrix calcContinuousJacobian(const State &xk, const Input &uk) const;
 };

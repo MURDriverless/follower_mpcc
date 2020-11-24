@@ -8,14 +8,16 @@
 #define NX 10
 #define NU 3
 
-// Number of polytopic constraints (don't worry about the term "polytopic"):
+// Number of polytopic constraints:
 // 1. Track constraint
 // 2. Rear tire forces ellipse constraint
 // 3. Front tire forces ellipse constraint
+// 4. Rear alpha constraint
+// 5. Front alpha constraint
 // while state and input constraints are termed as lower and upper "bounds"
-#define NPC 3
-// Number of soft constraints (we have 3 for all our polytopic constraints):
-#define NS 3
+#define NPC 5
+// Number of soft constraints (we have 5 for all our polytopic constraints):
+#define NS 5
 
 #define INF 1E5
 
@@ -39,8 +41,10 @@ struct StateInputIndex {
 
     // Constraint indices
     int constraint_track = 0;  // constrain the car within the track
-    int constraint_tire = 1;   // tire force ellipsis
-    int constraint_alpha = 2;  // max. slip angle
+    int constraint_tire_rear = 1;   // rear tire force ellipsis
+    int constraint_tire_front = 2;  // front tire force ellipsis
+    int constraint_alpha_rear = 3;  // rear tire slip angle
+    int constraint_alpha_front = 4; // front tire slip angle
 };
 
 static const StateInputIndex IndexMap;

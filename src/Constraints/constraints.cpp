@@ -217,3 +217,42 @@ Constraint1D Constraints::getFrontAlphaConstraint(const State &xk) const {
 
     return { J_alpha, lower_bound, upper_bound };
 }
+
+ConstraintsMatrix Constraints::getConstraints(const Track &track, const State &xk) const {
+    const Constraint1D track_constraint = getTrackConstraint(track, xk);
+    const Constraint1D tire_constraint_rear = getRearTireConstraint(xk);
+    const Constraint1D tire_constraint_front = getFrontTireConstraint(xk);
+    const Constraint1D alpha_constraint_rear = getRearAlphaConstraint(xk);
+    const Constraint1D alpha_constraint_front = getFrontAlphaConstraint(xk);
+
+    C_MPC C;
+    d_MPC dl;
+    d_MPC du;
+
+    // 1. Track constraint
+    C.row(IndexMap.constraint_track) = track_constraint.C_i;
+    dl(IndexMap.constraint_track) = track_constraint.lower_bound;
+    du(IndexMap.constraint_track) = track_constraint.upper_bound;
+
+    // 2. Rear tire force ellipsis
+    C.row(IndexMap.constraint_tire_rear) = tire_constraint_rear.C_i;
+    dl(IndexMap.constraint_tire_rear) = tire_constraint_rear.lower_bound;
+    du(IndexMap.constraint_tire_rear) = tire_constraint_rear.upper_bound;
+
+    // 3. Front tire force ellipsis
+    C.row(IndexMap.constraint_tire_front) = tire_constraint_front.C_i;
+    dl(IndexMap.constraint_tire_front) = tire_constraint_front.lower_bound;
+    du(IndexMap.constraint_tire_front) = tire_constraint_front.upper_bound;
+
+    // 4. Rear tire slip angle
+    C.row(IndexMap.constraint_alpha_rear) = alpha_constraint_rear.C_i;
+    dl(IndexMap.constraint_alpha_rear) = alpha_constraint_rear.lower_bound;
+    du(IndexMap.constraint_alpha_rear) = alpha_constraint_rear.upper_bound;
+
+    // 5. Front tire slip angle
+    C.row(IndexMap.constraint_alpha_front) = alpha_constraint_front.C_i;
+    dl(IndexMap.constraint_alpha_front) = alpha_constraint_front.lower_bound;
+    du(IndexMap.constraint_alpha_front) = alpha_constraint_front.upper_bound;
+
+    return { C, D_MPC::Zero(), dl, du };
+}

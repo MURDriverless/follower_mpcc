@@ -21,10 +21,19 @@ struct Constraint1D {
     const double upper_bound;
 };
 
+struct ConstraintsMatrix {
+    // dl <= C*xk + D*uk <= du
+    C_MPC C;
+    D_MPC D;
+    d_MPC dl;
+    d_MPC du;
+};
+
 class Constraints {
 public:
     Constraints();
     explicit Constraints(const DynamicBicycleModel &model_args);
+    ConstraintsMatrix getConstraints(const Track &track, const State &xk) const;
 private:
     static Constraint1D getTrackConstraint(const Track &track, const State &xk, double safety_margin = 0.0);
 

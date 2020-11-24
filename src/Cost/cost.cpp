@@ -36,12 +36,16 @@ CostTerm<Z_MPC, z_MPC> Cost::getSoftConstraintsCost() const {
     z_MPC z_cost = z_MPC::Zero();
     // Quadratic cost
     Z_cost(IndexMap.constraint_track, IndexMap.constraint_track) = cost_params.sc_quad_track;
-    Z_cost(IndexMap.constraint_tire, IndexMap.constraint_tire) = cost_params.sc_quad_tire;
-    Z_cost(IndexMap.constraint_alpha, IndexMap.constraint_alpha) = cost_params.sc_quad_alpha;
+    Z_cost(IndexMap.constraint_tire_rear, IndexMap.constraint_tire_rear) = cost_params.sc_quad_tire;
+    Z_cost(IndexMap.constraint_tire_front, IndexMap.constraint_tire_front) = cost_params.sc_quad_tire;
+    Z_cost(IndexMap.constraint_alpha_rear, IndexMap.constraint_alpha_rear) = cost_params.sc_quad_alpha;
+    Z_cost(IndexMap.constraint_alpha_front, IndexMap.constraint_alpha_front) = cost_params.sc_quad_alpha;
     // Linear cost
     z_cost(IndexMap.constraint_track) = cost_params.sc_lin_track;
-    z_cost(IndexMap.constraint_tire) = cost_params.sc_lin_tire;
-    z_cost(IndexMap.constraint_alpha) = cost_params.sc_lin_alpha;
+    z_cost(IndexMap.constraint_tire_rear) = cost_params.sc_lin_tire;
+    z_cost(IndexMap.constraint_tire_front) = cost_params.sc_lin_tire;
+    z_cost(IndexMap.constraint_alpha_rear) = cost_params.sc_lin_alpha;
+    z_cost(IndexMap.constraint_alpha_front) = cost_params.sc_lin_alpha;
     return { Z_cost, z_cost };
 }
 

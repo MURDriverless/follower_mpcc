@@ -15,7 +15,7 @@ Constraints::Constraints(const DynamicBicycleModel &model_args) {
     this->Fn_rear = model.params.lf / (model.params.lf + model.params.lr) * model.params.m * model.params.g;
 }
 
-TrackConstraints Constraints::getTrackConstraint(const Track &track, const State &xk, double safety_margin) {
+Constraint1D Constraints::getTrackConstraint(const Track &track, const State &xk, double safety_margin) {
     const double s = xk(IndexMap.virtual_state);
 
     const Vector2d outer_pos = track.outer.getPosition(s);
@@ -66,7 +66,13 @@ TrackConstraints Constraints::getTrackConstraint(const Track &track, const State
     const Vector2d lower_bound = Vector2d {-cross_track_limit_abs, -INF} - p_bar;
     const Vector2d upper_bound = Vector2d {cross_track_limit_abs, INF} - p_bar;
 
-    return { J_p, lower_bound, upper_bound };
+    // Note that we only want to constrain x-prime as it is the lateral part of the track,
+    // and it does not make sense to constraint the longitudinal part of the track: y-prime
+    C_i_MPC J_p_x = J_p.row(0);
+    const double lower_bound_x = lower_bound(0);
+    const double upper_bound_x = upper_bound(1);
+
+    return { J_p, lower_bound_x, upper_bound_x };
 }
 
 Constraint1D Constraints::getRearTireConstraint(const State &xk) const {

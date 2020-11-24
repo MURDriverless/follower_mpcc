@@ -15,12 +15,6 @@
 using Eigen::Vector2d;
 using Eigen::Matrix;
 
-struct TrackConstraints {
-    Matrix<double, 2, NX> J_p;
-    Vector2d lower_bound;
-    Vector2d upper_bound;
-};
-
 struct Constraint1D {
     C_i_MPC C_i;
     const double lower_bound;
@@ -32,7 +26,7 @@ public:
     Constraints();
     explicit Constraints(const DynamicBicycleModel &model_args);
 private:
-    static TrackConstraints getTrackConstraint(const Track &track, const State &xk, double safety_margin = 0.0);
+    static Constraint1D getTrackConstraint(const Track &track, const State &xk, double safety_margin = 0.0);
 
     // Tire force ellipsis constraint
     Constraint1D getRearTireConstraint(const State &xk) const;

@@ -175,7 +175,7 @@ CostTerm<Q_MPC, q_MPC> Cost::getBetaCost(const State &xk) const {
     return { Q, q };
 }
 
-CostMatrix Cost::getCost(const CubicSpline2D &path, const State &xk) {
+CostMatrix Cost::getCost(const CubicSpline2D &path, const State &xk) const {
     CostTerm<Q_MPC, q_MPC> contouring = getContouringCost(path, xk);
     CostTerm<Q_MPC, q_MPC> raw_input = getRawInputCost();
     CostTerm<R_MPC, r_MPC> input_change = getInputChangeCost();

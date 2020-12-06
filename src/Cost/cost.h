@@ -63,7 +63,7 @@ class Cost {
 public:
     Cost();
     Cost(const CostParams &costParams, const ModelParams &modelParams);
-    CostMatrix getCost(const CubicSpline2D &path, const State &xk);
+    CostMatrix getCost(const CubicSpline2D &path, const State &xk) const;
 private:
     static RefPoint getRefPoint(const CubicSpline2D &path, const State &xk);
     static ContouringError getContouringError(const CubicSpline2D &path, const State &xk);

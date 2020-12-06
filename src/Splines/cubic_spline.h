@@ -21,6 +21,7 @@ public:
     double getSecondDerivative(double t) const;
     // Spline parameter breakpoints
     VectorXd t_spline;
+    VectorXd ft_spline;
     // Spline coefficients
     VectorXd a;
     VectorXd b;

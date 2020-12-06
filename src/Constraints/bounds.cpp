@@ -27,12 +27,12 @@ Bounds::Bounds(const std::string &file_path) {
 /*
  * Public getters
  * */
-Bounds_x Bounds::getLowerStateBounds() { return x_lower; }
-Bounds_x Bounds::getUpperStateBounds() { return x_upper; }
-Bounds_u Bounds::getLowerInputBounds() { return u_lower; }
-Bounds_u Bounds::getUpperInputBounds() { return u_upper; }
-Bounds_s Bounds::getLowerSoftBounds() { return s_lower; }
-Bounds_s Bounds::getUpperSoftBounds() { return s_upper; }
+Bounds_x Bounds::getLowerStateBounds(const State &xk) const { return x_lower - xk; }
+Bounds_x Bounds::getUpperStateBounds(const State &xk) const { return x_upper - xk; }
+Bounds_u Bounds::getLowerInputBounds(const Input &uk) const { return u_lower - uk; }
+Bounds_u Bounds::getUpperInputBounds(const Input &uk) const { return u_upper - uk; }
+Bounds_s Bounds::getLowerSoftBounds() const { return s_lower; }
+Bounds_s Bounds::getUpperSoftBounds() const { return s_upper; }
 
 /*
  * Private setters

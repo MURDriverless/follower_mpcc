@@ -5,6 +5,7 @@
 #ifndef FOLLOWER_MPCC_TYPES_H
 #define FOLLOWER_MPCC_TYPES_H
 
+#include <cmath>
 #include <Eigen/Dense>
 #include "config.h"
 
@@ -60,5 +61,11 @@ typedef Eigen::Matrix<double, NX, 1> Bounds_x;
 typedef Eigen::Matrix<double, NU, 1> Bounds_u;
 typedef Eigen::Matrix<double, NS, 1> Bounds_s;
 
+
+// Helper functions
+namespace mpcc {
+    void vxNonZero(State xk, double vx_non_zero);
+    void sanitiseState(State xk, double path_length);
+}
 
 #endif //FOLLOWER_MPCC_TYPES_H

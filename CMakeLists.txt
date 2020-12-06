@@ -35,7 +35,9 @@ add_executable(follower_mpcc
         src/Constraints/bounds.cpp
         src/Constraints/constraints.h
         src/Constraints/constraints.cpp
-        src/Splines/track.h)
+        src/Splines/track.h
+        src/MPC/mpc.h
+        src/MPC/mpc.cpp src/types.cpp src/Solvers/solver_interface.h src/Solvers/hpipm_interface.h src/Solvers/hpipm_interface.cpp)
 
 # For matplotlib
 find_package(PythonLibs REQUIRED)

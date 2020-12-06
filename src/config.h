@@ -19,7 +19,8 @@
 // Number of soft constraints (we have 5 for all our polytopic constraints):
 #define NS 5
 
-#define INF 1E5
+static constexpr int N = 30;
+static constexpr double INF = 1E5;
 
 struct StateInputIndex {
     // State indices

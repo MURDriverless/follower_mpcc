@@ -16,12 +16,12 @@ class Bounds {
 public:
     Bounds();
     explicit Bounds(const std::string &file_path);
-    Bounds_x getLowerStateBounds();
-    Bounds_x getUpperStateBounds();
-    Bounds_u getLowerInputBounds();
-    Bounds_u getUpperInputBounds();
-    Bounds_s getLowerSoftBounds();
-    Bounds_s getUpperSoftBounds();
+    Bounds_x getLowerStateBounds(const State &xk) const;
+    Bounds_x getUpperStateBounds(const State &xk) const;
+    Bounds_u getLowerInputBounds(const Input &uk) const;
+    Bounds_u getUpperInputBounds(const Input &uk) const;
+    Bounds_s getLowerSoftBounds() const;
+    Bounds_s getUpperSoftBounds() const;
 private:
     Bounds_x x_lower;
     Bounds_x x_upper;

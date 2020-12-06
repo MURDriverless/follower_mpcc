@@ -8,6 +8,9 @@
 #include "cubic_spline2d.h"
 
 struct Track {
+    Track() : inner(<#initializer#>, <#initializer#>, 0), centre(<#initializer#>, <#initializer#>, 0),
+              path(<#initializer#>, <#initializer#>, 0) {}
+
     CubicSpline2D outer;
     CubicSpline2D inner;
     CubicSpline2D centre;
